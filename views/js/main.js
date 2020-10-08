@@ -1,3 +1,8 @@
+var roomDateObj;
+//TODO: 还有BUG，应该记录每一个room的对应Obj用以引用传参，还涉及到每一次刷新时存储体的清空。
+function roomDateOnclick(obj){
+    console.log(obj);
+}
 layui.use(['form','mobile'], function(){
     var form = layui.form;
     var $ = layui.$;
@@ -189,12 +194,14 @@ layui.use(['form','mobile'], function(){
 
                 if(roomDateObj[i].style == "free"){
                     $('#room_' +id+ ' .layui-btn-group').append(
-                        "<button style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn\">可选</button>"
+                        "<button onclick='roomDateOnclick(roomDateObj["+ i +"])' " +
+                        "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn\">可选</button>"
                     );
                 }
                 if(roomDateObj[i].style == "used"){
                     $('#room_' +id+ ' .layui-btn-group').append(
-                        "<button style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
+                        "<button onclick='roomDateOnclick(roomDateObj["+ i +"])' " +
+                        "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
                     );
                 }
                 //TODO: 在这里绘制后台返回的某会议室的日程安排
