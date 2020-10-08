@@ -157,49 +157,58 @@ layui.use(['form','mobile'], function(){
         console.log("加载会议室--"+id+"---"+name+"--的预约详情");
         $('#mainTable').append("<div id='room_"+ id + "'>" + name + "</div>");
         $('#room_'+id).append("<div id='room-btn-group_"+ id + "\' class= \'layui-btn-group\'></div>");
-        $.post("/ajax/roomSchedule.php",
+        // $.post("/ajax/roomSchedule.php",
+        //     {
+        //         room:id,
+        //         time:new Date(new Date().toLocaleDateString()).getTime()+86400000*date,
+        //     },
+        //     function (data, status){
+        //
+        //         var Ewidth = $('#mainTable').width();
+        //
+        //         viewRoomObj = JSON.parse(data);
+        //         if(viewRoomObj.len==0){
+        //             console.log(name+"无预约安排");
+        //         }
+        //         else {
+        //             for(i in viewRoomObj.orders){
+        //
+        //                 start = new Date(Number(viewRoomObj.orders[i].startTime));
+        //                 end = new Date(Number(viewRoomObj.orders[i].endTime))
+        //                 takeTime = (end-start).valueOf();
+        //
+        //                 useWidth = Ewidth*(takeTime/84/600000);
+        //
+        //                 startH = start.getHours()>9?
+        //                     start.getHours():"0"+start.getHours();
+        //                 startM = start.getMinutes()>9?
+        //                     start.getMinutes():"0"+start.getMinutes();
+        //                 endH = end.getHours()>9?
+        //                     end.getHours():"0"+end.getHours();
+        //                 endM = end.getMinutes()>9?
+        //                     end.getMinutes():"0"+end.getMinutes();
+        //
+        //                 $('#room-btn-group_'+id).append(
+        //                     "<button style='width: "+useWidth+"px' " +
+        //                     "type='button' class='layui-btn layui-btn-primary'" +
+        //                     "$(this).hover(showLayer("+id+"), closeLayer()) >" +
+        //                     startH+":"+startM+
+        //                     "-"+endH+":"+endM+
+        //                     "</button>"
+        //                 )
+        //             }
+        //         }
+        //     //    TODO 这里可能需要更新视图；
+        //     })
+        $.post("/ajax/roomDate.php",
             {
                 room:id,
                 time:new Date(new Date().toLocaleDateString()).getTime()+86400000*date,
             },
-            function (data, status){
-
-                var Ewidth = $('#mainTable').width();
-
-                viewRoomObj = JSON.parse(data);
-                if(viewRoomObj.len==0){
-                    console.log(name+"无预约安排");
+                function (data, status){
+                console.log(data);
                 }
-                else {
-                    for(i in viewRoomObj.orders){
-
-                        start = new Date(Number(viewRoomObj.orders[i].startTime));
-                        end = new Date(Number(viewRoomObj.orders[i].endTime))
-                        takeTime = (end-start).valueOf();
-
-                        useWidth = Ewidth*(takeTime/84/600000);
-
-                        startH = start.getHours()>9?
-                            start.getHours():"0"+start.getHours();
-                        startM = start.getMinutes()>9?
-                            start.getMinutes():"0"+start.getMinutes();
-                        endH = end.getHours()>9?
-                            end.getHours():"0"+end.getHours();
-                        endM = end.getMinutes()>9?
-                            end.getMinutes():"0"+end.getMinutes();
-
-                        $('#room-btn-group_'+id).append(
-                            "<button style='width: "+useWidth+"px' " +
-                            "type='button' class='layui-btn layui-btn-primary'" +
-                            "$(this).hover(showLayer("+id+"), closeLayer()) >" +
-                            startH+":"+startM+
-                            "-"+endH+":"+endM+
-                            "</button>"
-                        )
-                    }
-                }
-            //    TODO 这里可能需要更新视图；
-            })
+            )
 
         $('#mainTable').append("<hr class='layui-bg-orange'>");
         console.log(""+id+": "+name);
