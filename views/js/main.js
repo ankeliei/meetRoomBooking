@@ -106,10 +106,10 @@ layui.use(['form','mobile'], function(){
                 }
                 else {
                     $('#mainTable').empty();
-                    $('#mainTable').append("<hr class='layui-bg-orange'>"); //首行横线
                     for(i in mainTableObj.rooms){
                         viewRoom(mainTableObj.rooms[i].id, mainTableObj.rooms[i].name);
                     }
+                    $('#mainTable').append("<hr class='layui-bg-orange'>"); //尾行横线
                 }
             })
     }
@@ -151,66 +151,55 @@ layui.use(['form','mobile'], function(){
                 form.render("select","chooseRoom");
             })
     }
-
     //绘制某个会议室
     function viewRoom(id,name){
+        $('#mainTable').append("<hr class='layui-bg-orange'>");
         console.log("加载会议室--"+id+"---"+name+"--的预约详情");
-        $('#mainTable').append("<div id='room_"+ id + "'>" + name + "</div>");
-        $('#room_'+id).append("<div id='room-btn-group_"+ id + "\' class= \'layui-btn-group\'></div>");
-        // $.post("/ajax/roomSchedule.php",
-        //     {
-        //         room:id,
-        //         time:new Date(new Date().toLocaleDateString()).getTime()+86400000*date,
-        //     },
-        //     function (data, status){
-        //
-        //         var Ewidth = $('#mainTable').width();
-        //
-        //         viewRoomObj = JSON.parse(data);
-        //         if(viewRoomObj.len==0){
-        //             console.log(name+"无预约安排");
-        //         }
-        //         else {
-        //             for(i in viewRoomObj.orders){
-        //
-        //                 start = new Date(Number(viewRoomObj.orders[i].startTime));
-        //                 end = new Date(Number(viewRoomObj.orders[i].endTime))
-        //                 takeTime = (end-start).valueOf();
-        //
-        //                 useWidth = Ewidth*(takeTime/84/600000);
-        //
-        //                 startH = start.getHours()>9?
-        //                     start.getHours():"0"+start.getHours();
-        //                 startM = start.getMinutes()>9?
-        //                     start.getMinutes():"0"+start.getMinutes();
-        //                 endH = end.getHours()>9?
-        //                     end.getHours():"0"+end.getHours();
-        //                 endM = end.getMinutes()>9?
-        //                     end.getMinutes():"0"+end.getMinutes();
-        //
-        //                 $('#room-btn-group_'+id).append(
-        //                     "<button style='width: "+useWidth+"px' " +
-        //                     "type='button' class='layui-btn layui-btn-primary'" +
-        //                     "$(this).hover(showLayer("+id+"), closeLayer()) >" +
-        //                     startH+":"+startM+
-        //                     "-"+endH+":"+endM+
-        //                     "</button>"
-        //                 )
-        //             }
-        //         }
-        //     //    TODO 这里可能需要更新视图；
-        //     })
+        $('#mainTable').append("<div id='room_"+ id + "'></div>");
+        $('#room_'+id).append("<div class='room_name'>"+name+"</div>");
+        $('#room_'+id).append("<div class='layui-btn-group my-btn-group'></div>");
+
         $.post("/ajax/roomDate.php",
             {
                 room:id,
                 time:new Date(new Date().toLocaleDateString()).getTime()+86400000*date,
             },
-                function (data, status){
+                function (data, status)
+            {
                 console.log(data);
-                }
-            )
 
-        $('#mainTable').append("<hr class='layui-bg-orange'>");
+                roomDateObj = JSON.parse(data);
+
+                for(i in roomDateObj){
+
+                start = new Date(Number(roomDateObj[i].startTime));
+                end = new Date(Number(roomDateObj[i].endTime))
+                takeTime = (end-start).valueOf();
+
+                useWidth = takeTime/84/6000;    //此段时长所占百分比
+
+                startH = start.getHours()>9?
+                    start.getHours():"0"+start.getHours();
+                startM = start.getMinutes()>9?
+                    start.getMinutes():"0"+start.getMinutes();
+                endH = end.getHours()>9?
+                    end.getHours():"0"+end.getHours();
+                endM = end.getMinutes()>9?
+                    end.getMinutes():"0"+end.getMinutes();
+
+                if(roomDateObj[i].style == "free"){
+                    $('#room_' +id+ ' .layui-btn-group').append(
+                        "<button style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn\">可选</button>"
+                    );
+                }
+                if(roomDateObj[i].style == "used"){
+                    $('#room_' +id+ ' .layui-btn-group').append(
+                        "<button style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
+                    );
+                }
+                //TODO: 在这里绘制后台返回的某会议室的日程安排
+            }
+        })
         console.log(""+id+": "+name);
     }
 });

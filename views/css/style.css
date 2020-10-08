@@ -13,3 +13,11 @@
 .fr{
     float: right;
 }
+.room_name{
+    width: 15%;
+    display: inline;
+}
+.my-btn-group{
+    width: 85%;
+    float: right;
+}

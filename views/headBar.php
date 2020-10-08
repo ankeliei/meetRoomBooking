@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>头部导航栏</title>
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/style.css">
     <script src="/layui/layui.js"></script>
 </head>
 <body>
