@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-    include("headBar.html")
+    include("headBar.php")
     ?>
     <div class="layui-container">
         <div class="layui-row">

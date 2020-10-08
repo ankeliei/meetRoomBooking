@@ -5,13 +5,13 @@
     <title>我的信息</title>
     <script>
         window.onload=function(){
-            document.getElementById("me").className += " layui-this";
+            document.getElementById("info").className += " layui-this";
         }
     </script>
 </head>
 <body>
     <?php
-    include("headBar.html")
+    include("headBar.php")
     ?>
 </body>
 </html>
