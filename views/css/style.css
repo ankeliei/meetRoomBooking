@@ -1,0 +1,15 @@
+.login-main{
+    margin: 200px auto;
+    width: 400px;
+}
+.layui-elip{
+    text-align: center;
+    font-size: 30px;
+    font-family: "YouYuan",sans-serif;
+}
+.layui-input-block{
+    margin: auto;
+}
+.fr{
+    float: right;
+}

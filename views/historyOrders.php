@@ -11,7 +11,7 @@
 </head>
 <body>
     <?php
-        include("headBar.html")
+    include("headBar.html")
     ?>
 </body>
 </html>
