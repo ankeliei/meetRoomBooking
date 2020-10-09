@@ -45,7 +45,33 @@
                 </div>
             </div>
             <div class="layui-col-md3">
-                这里是右侧详情信息
+                <div class="something">
+                    <div id="info">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>请选择一个会议室</legend>
+                        </fieldset>
+                        <div id="info-in" class="bornDisplayNone">
+                            <div id="freeOrUsed">freeOrUsed</div>
+                            <div id="startAndEnd">startAndEnd</div>
+                            <div id="infoOptions">infoOptions</div>
+                            <div id="infoText">infoText</div>
+                        </div>
+                    </div>
+                    <div id="whoUse" class="bornDisplayNone">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>使用人：</legend>
+                        </fieldset>
+                        <div id="orderInfo">orderInfo</div>
+                    </div>
+                    <div id="makeOrder" class="bornDisplayNone">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>选择预约时间：</legend>
+                        </fieldset>
+                        <div id="chooseStartTime">chooseStartTime</div>
+                        <div id="chooseEndtTime">chooseEndtTime</div>
+                        <div id="choosed">choosed</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

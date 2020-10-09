@@ -1,8 +1,4 @@
 var roomDateObj;
-//TODO: 还有BUG，应该记录每一个room的对应Obj用以引用传参，还涉及到每一次刷新时存储体的清空。
-function roomDateOnclick(obj){
-    console.log(obj);
-}
 layui.use(['form','mobile'], function(){
     var form = layui.form;
     var $ = layui.$;
@@ -96,6 +92,7 @@ layui.use(['form','mobile'], function(){
     }
     //加载符合筛选条件的会议室
     function ajaxMainTable(){
+        roomDateObj = {};
         console.log("更新了主数据区");
         $.post("/ajax/mainTable.php",
             {
@@ -173,12 +170,12 @@ layui.use(['form','mobile'], function(){
             {
                 console.log(data);
 
-                roomDateObj = JSON.parse(data);
+                roomDateObj[id] = JSON.parse(data);
 
-                for(i in roomDateObj){
+                for(i in roomDateObj[id]){
 
-                start = new Date(Number(roomDateObj[i].startTime));
-                end = new Date(Number(roomDateObj[i].endTime))
+                start = new Date(Number(roomDateObj[id][i].startTime));
+                end = new Date(Number(roomDateObj[id][i].endTime))
                 takeTime = (end-start).valueOf();
 
                 useWidth = takeTime/84/6000;    //此段时长所占百分比
@@ -192,15 +189,16 @@ layui.use(['form','mobile'], function(){
                 endM = end.getMinutes()>9?
                     end.getMinutes():"0"+end.getMinutes();
 
-                if(roomDateObj[i].style == "free"){
+                if(roomDateObj[id][i].style == "free"){
                     $('#room_' +id+ ' .layui-btn-group').append(
-                        "<button onclick='roomDateOnclick(roomDateObj["+ i +"])' " +
+                        "<button onclick='roomDateOnclick(roomDateObj["+id+"]["+ i +"],"+id+",\""+name+"\")' " +
+                        "lay-tips='要支持的嗷' "+
                         "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn\">可选</button>"
                     );
                 }
-                if(roomDateObj[i].style == "used"){
+                if(roomDateObj[id][i].style == "used"){
                     $('#room_' +id+ ' .layui-btn-group').append(
-                        "<button onclick='roomDateOnclick(roomDateObj["+ i +"])' " +
+                        "<button onclick='roomDateOnclick(roomDateObj["+id+"]["+ i +"],"+id+",\""+name+"\")' " +
                         "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
                     );
                 }
@@ -210,3 +208,19 @@ layui.use(['form','mobile'], function(){
         console.log(""+id+": "+name);
     }
 });
+
+function roomDateOnclick(obj,id,name){
+    layui.use('form',function () {
+        var $ = layui.$;
+        console.log(obj);
+
+        $('#info-in').css('display','block');
+
+        $('.layui-col-md3').append(
+            "会议室: "+name +"<br>"+
+            "状态: "+obj['style']+"<br>"+
+            "开始时间："+obj['startTime']+"<br>"+
+            "结束时间: "+obj['endTime']
+        );
+    })
+}

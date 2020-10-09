@@ -21,3 +21,9 @@
     width: 85%;
     float: right;
 }
+.something{
+    padding-left: 20px;
+}
+.bornDisplayNone{
+    display: none;
+}
