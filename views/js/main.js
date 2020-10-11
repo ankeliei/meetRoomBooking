@@ -214,13 +214,35 @@ function roomDateOnclick(obj,id,name){
         var $ = layui.$;
         console.log(obj);
 
-        $('#info-in').css('display','block');
+        $('#info-in').css('display','none');
+        $('#whoUse').css('display','none');
+        $('#makeOrder').css('display','none');
 
-        $('.layui-col-md3').append(
-            "会议室: "+name +"<br>"+
-            "状态: "+obj['style']+"<br>"+
-            "开始时间："+obj['startTime']+"<br>"+
-            "结束时间: "+obj['endTime']
-        );
+        var roomInfo = {};
+        $.post("/ajax/roomInfo.php",
+            {
+                id : id,
+            },function (data, status){
+                roomInfo = JSON.parse(data);
+                $('#infoOptions').html(
+                    "会议室类型："+roomInfo['roomType']+"<br>"+
+                    "最大容纳量："+roomInfo['roomSize']+"<br>"+
+                    "多媒体设备："+roomInfo['mediaType']);
+                $('#infoText').html("备注："+roomInfo['stat']);
+            })
+
+        $('#info-in').css('display','block');
+        $('#roomName').html(name);
+        $('#startAndEnd').html(obj['startTime']+" - "+obj['endTime']);
+
+        if(obj['style']=="free"){
+            $('#makeOrder').css('display','block');
+
+        }
+        if(obj['style']=="used"){
+            $('#whoUse').css('display','block');
+            //TODO:差一个预约人名
+            $('#orderInfo').html(obj['orders']['txt']);
+        }
     })
 }
