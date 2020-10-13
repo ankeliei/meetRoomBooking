@@ -155,6 +155,7 @@ layui.use(['form','mobile'], function(){
     }
     //绘制某个会议室
     function viewRoom(id,name){
+        console.log("used viewRoom()");
         $('#mainTable').append("<hr class='layui-bg-orange'>");
         console.log("加载会议室--"+id+"---"+name+"--的预约详情");
         $('#mainTable').append("<div id='room_"+ id + "'></div>");
@@ -180,14 +181,14 @@ layui.use(['form','mobile'], function(){
 
                 useWidth = takeTime/84/6000;    //此段时长所占百分比
 
-                startH = start.getHours()>9?
-                    start.getHours():"0"+start.getHours();
-                startM = start.getMinutes()>9?
-                    start.getMinutes():"0"+start.getMinutes();
-                endH = end.getHours()>9?
-                    end.getHours():"0"+end.getHours();
-                endM = end.getMinutes()>9?
-                    end.getMinutes():"0"+end.getMinutes();
+                // startH = start.getHours()>9?
+                //     start.getHours():"0"+start.getHours();
+                // startM = start.getMinutes()>9?
+                //     start.getMinutes():"0"+start.getMinutes();
+                // endH = end.getHours()>9?
+                //     end.getHours():"0"+end.getHours();
+                // endM = end.getMinutes()>9?
+                //     end.getMinutes():"0"+end.getMinutes();
 
                 if(roomDateObj[id][i].style == "free"){
                     $('#room_' +id+ ' .layui-btn-group').append(
@@ -212,6 +213,7 @@ layui.use(['form','mobile'], function(){
 function roomDateOnclick(obj,id,name){
     layui.use('form',function () {
         var $ = layui.$;
+        var form = layui.form;
         console.log(obj);
 
         $('#info-in').css('display','none');
@@ -236,13 +238,75 @@ function roomDateOnclick(obj,id,name){
         $('#startAndEnd').html(obj['startTime']+" - "+obj['endTime']);
 
         if(obj['style']=="free"){
+            //对下单表单显示
             $('#makeOrder').css('display','block');
+            //TODO：填充开始时间
+            console.log("即将卡顿");
+            setStartTimeOptions(obj['startTime'],obj['endTime']);
+            setEndTimeOptions(obj['startTime'],obj['endTime']);
 
+            //TODO：填充结束时间
+            //TODO：检查txt是否合法
         }
         if(obj['style']=="used"){
+            //对预约详情部分显示
             $('#whoUse').css('display','block');
             //TODO:差一个预约人名
-            $('#orderInfo').html(obj['orders']['txt']);
+            $('#orderUser').html(obj['orders']['user']);
+            $('#orderTxt').html(obj['orders']['txt']);
+        }
+
+        form.on('submit(orderTime)',function (data){
+            console.log("点击了提交按钮");
+            $.ajax({
+                url:'/ajax/makeOrder.php',
+                data:data.field,
+                dataType:'text',
+                type:'post',
+                success:function (data){
+                    console.log("提交响应成功！")
+                }
+            })
+            return false;
+        });
+
+        function setStartTimeOptions(startTimeArg,endTimeArg){
+
+            let startTime = Number(startTimeArg);
+            let endTime = Number(endTimeArg)-600000;
+
+            $('#startTimeSelect').empty();
+            $('#startTimeSelect').append("<option value=\"\">请选择开始时间</option>");
+
+            for(startTime; startTime <= endTime; startTime = startTime+600000){
+
+                var timePointObj = new Date(startTime);
+                var timeString = timePointObj.toTimeString().slice(0,5)
+
+                $('#startTimeSelect').append(
+                    "<option value='"+ startTime +"'>"+ timeString +"</option>"
+                );
+            }
+            form.render("select","orderTime");
+        }
+        function setEndTimeOptions(startTimeArg,endTimeArg){
+
+            let startTime = Number(startTimeArg)+600000;
+            let endTime = Number(endTimeArg);
+
+            $('#endTimeSelect').empty();
+            $('#endTimeSelect').append("<option value=\"\">请选择结束时间</option>");
+
+            for(startTime; startTime <= endTime; startTime = startTime+600000){
+
+                var timePointObj = new Date(startTime);
+                var timeString = timePointObj.toTimeString().slice(0,5)
+
+                $('#endTimeSelect').append(
+                    "<option value='"+ startTime +"'>"+ timeString +"</option>"
+                );
+            }
+            form.render("select","orderTime");
         }
     })
 }
