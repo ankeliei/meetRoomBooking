@@ -31,7 +31,7 @@
         </dl>
     </li>
     <li id="admin"
-        class="layui-nav-item <?php if($_SESSION['isAdmin']==0){echo "bornDisplayNone";}?>">
+        class="layui-nav-item<?php if($_SESSION['isAdmin']!=1){echo ", bornDisplayNone";}?>">
         <a href="/views/admin.php">管理员</a>
     </li>
     <li id="about" class="layui-nav-item"><a href="/views/about.php">关于</a></li>
