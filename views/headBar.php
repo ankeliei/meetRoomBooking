@@ -10,7 +10,7 @@
 <body>
 <ul class="layui-nav" lay-filter="">
     <li class="layui-nav-item"><a href="/index.php"><i class="layui-icon" style="font-size: 30px; color: #009688;">&#xe68e;</i></a></li>
-    <li id="main"   class="layui-nav-item"><a href="/views/main.php">预约</a></li>
+    <li id="main" class="layui-nav-item"><a href="/views/main.php">预约</a></li>
     <li id="info" class="layui-nav-item">
         <a href="javascript:;">
             <?
@@ -29,6 +29,10 @@
                 '<dd><a href="/views/me.php">我的信息</a></dd>';
             ?>
         </dl>
+    </li>
+    <li id="admin"
+        class="layui-nav-item <?php if($_SESSION['isAdmin']==0){echo "bornDisplayNone";}?>">
+        <a href="/views/admin.php">管理员</a>
     </li>
     <li id="about" class="layui-nav-item"><a href="/views/about.php">关于</a></li>
 </ul>

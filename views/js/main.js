@@ -256,6 +256,7 @@ function roomDateOnclick(obj,id,name){
             $('#orderTxt').html(obj['orders']['txt']);
         }
 
+        //预约提交响应
         form.on('submit(orderTime)',function (data){
             console.log("点击了提交按钮");
             $.ajax({
@@ -264,7 +265,16 @@ function roomDateOnclick(obj,id,name){
                 dataType:'text',
                 type:'post',
                 success:function (data){
-                    console.log("提交响应成功！")
+                    resObj = JSON.parse(data);
+                    if(resObj['status'] == 1){
+                        window.location.replace("login.html");
+                    }
+                    if(resObj['status'] == 0){
+                        layer.open({
+                            type: 1,
+                            content: "预约提交成功！等待管理员审核!"
+                        })
+                    }
                 }
             })
             return false;
