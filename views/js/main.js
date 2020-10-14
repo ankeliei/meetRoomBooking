@@ -216,6 +216,7 @@ function roomDateOnclick(obj,id,name){
         var form = layui.form;
         console.log(obj);
 
+        
         $('#info-in').css('display','none');
         $('#whoUse').css('display','none');
         $('#makeOrder').css('display','none');
@@ -241,7 +242,6 @@ function roomDateOnclick(obj,id,name){
             //对下单表单显示
             $('#makeOrder').css('display','block');
             //TODO：填充开始时间
-            console.log("即将卡顿");
             setStartTimeOptions(obj['startTime'],obj['endTime']);
             setEndTimeOptions(obj['startTime'],obj['endTime']);
 
@@ -259,12 +259,15 @@ function roomDateOnclick(obj,id,name){
         //预约提交响应
         form.on('submit(orderTime)',function (data){
             console.log("点击了提交按钮");
+            data['field']['room'] = id;
+            console.log(data);
             $.ajax({
                 url:'/ajax/makeOrder.php',
                 data:data.field,
                 dataType:'text',
                 type:'post',
                 success:function (data){
+
                     resObj = JSON.parse(data);
                     if(resObj['status'] == 1){
                         window.location.replace("login.html");
@@ -274,6 +277,7 @@ function roomDateOnclick(obj,id,name){
                             type: 1,
                             content: "预约提交成功！等待管理员审核!"
                         })
+                        roomDateOnclick(obj,id,name);   //重新刷新右侧选择区
                     }
                 }
             })

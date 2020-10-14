@@ -13,9 +13,10 @@
         $startTime = $_POST['startTimeSelect'];
         $endTime = $_POST['endTimeSelect'];
         $orderTxt = $_POST['orderTxt'];
+        $roomid = $_POST['room'];
 
         $sql = " INSERT INTO newOrders (id, user, room, createTime, startTime, endTime, txt, status, revokeTime) ".
-            " VALUES (NULL, '" .$userid. "', '3', '', '" .$startTime. "', '" .$endTime. "', '" .$orderTxt. "', '', '')";
+            " VALUES (NULL, '" .$userid. "', '" .$roomid."', '', '" .$startTime. "', '" .$endTime. "', '" .$orderTxt. "', '', '')";
 
         $con->setSql($sql);
         $res = $con->getRes();

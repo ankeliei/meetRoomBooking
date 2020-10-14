@@ -9,9 +9,9 @@
     <?php
     include("headBar.php")
     ?>
-    <div class="layui-container">
+    <div class="layui-fluid">
         <div class="layui-row">
-            <div class="layui-col-md8">
+            <div class="layui-col-sm12 layui-col-md8">
                 这里是左侧表格页面
                 <form class="layui-form" lay-filter="chooseRoom">
                     <div class="layui-inline" style="width: 23%">
@@ -38,7 +38,7 @@
                     这里是会议室预约详情大表位置
                 </div>
             </div>
-            <div class="layui-col-md4">
+            <div class="layui-col-sm12 layui-col-md4">
                 <div class="something">
 <!--                    会议室详情展示-->
                     <div id="info">
