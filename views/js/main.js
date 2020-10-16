@@ -49,18 +49,11 @@ layui.use(['form','mobile'], function(){
     }
     //初始化时间下拉选择框
     function dateItem(){
-        var mydate = new Date();            //今天
-        console.log("now:"+mydate);
-        var nextday = new Date()            //明天
-        nextday.setTime(nextday.valueOf()+86400000);
-        var nnday = new Date();             //后天
-        nnday.setTime(nnday.valueOf()+86400000+86400000);
-
-        var html = "<option value='0'>"+mydate.toLocaleDateString()+"</option>"
-                  +"<option value='1'>"+nextday.toLocaleDateString()+"</option>"
-                  +"<option value='2'>"+nnday.toLocaleDateString()+"</option>";
-
-        $('#date').html(html);
+        for(i=0; i<14; i++){
+            var viewDay = new Date();
+            viewDay.setTime(viewDay.valueOf()+86400000*i);
+            $('#date').append("<option value='"+i+"'>"+viewDay.toLocaleDateString()+"</option>")
+        }
     }
     //处理筛选下拉框的变动
     function chooseChange(a){
