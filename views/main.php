@@ -46,7 +46,7 @@
                             <legend id="roomName">请选择一个会议室</legend>
                         </fieldset>
                         <div id="info-in" class="bornDisplayNone">
-                            <div id="startAndEnd">startAndEnd</div>
+<!--                            <div id="startAndEnd">startAndEnd</div>-->
                             <div id="infoOptions">infoOptions</div>
                             <div id="infoText">infoText</div>
 
@@ -55,7 +55,7 @@
 <!--                    预约详情展示-->
                     <div id="whoUse" class="bornDisplayNone">
                         <fieldset class="layui-elem-field layui-field-title">
-                            <legend>预约详情：</legend>
+                            <legend>占用详情：</legend>
                         </fieldset>
                         <div id="orderUser"></div>
                         <div id="orderTxt">orderInfo</div>
@@ -101,6 +101,15 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+<!--                    竞争者展示-->
+                    <div id="whoRe" class="bornDisplayNone">
+                        <fieldset class="layui-elem-field layui-field-title">
+                            <legend>同时段的其他预约：</legend>
+                        </fieldset>
+                        <ul id="whoReIn">
+
+                        </ul>
                     </div>
 
                 </div>
