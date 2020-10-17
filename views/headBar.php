@@ -31,10 +31,16 @@
                     ?>
                 </dl>
             </li>
-            <li id="admin"
-                class="layui-nav-item<?php if($_SESSION['isAdmin']!=1){echo ", bornDisplayNone";}?>">
-                <a href="/views/admin.php">管理员</a>
+
+            <li id="admin" class="layui-nav-item<?php if($_SESSION['isAdmin']!=1){echo ", bornDisplayNone";}?>">
+                <a href="javascript:;">系统管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="ordersAdmin.php">预约管理</a></dd>
+                    <dd><a href="usersAdmin.php">用户管理</a></dd>
+                    <dd><a href="roomsAdmin.php">会议室管理</a></dd>
+                </dl>
             </li>
+
             <li id="about" class="layui-nav-item"><a href="/views/about.php">关于</a></li>
         </ul>
 

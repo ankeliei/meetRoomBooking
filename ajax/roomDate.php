@@ -9,6 +9,7 @@
         $timeEnd . " >= startTime ) or ( " .
         $time . " <= endTime and " .
         $timeEnd . " >= endTime )) and room = " . $room;
+    //TODO:SQL语句可以优化
     $con->setSql($sql);
     $res = $con->getRes();
 
