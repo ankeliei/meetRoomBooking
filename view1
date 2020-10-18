@@ -1,0 +1,719 @@
+@{
+
+    ViewBag.Title = "会议室预定";
+
+}
+
+<link rel="stylesheet" href="@Url.Content("~/assets/plugins/datepicker/datepicker3.css")">
+
+<!-- datepicker -->
+
+<script src="@Url.Content("~/assets/plugins/datepicker/bootstrap-datepicker.js")"></script>
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/dist/book_alertform.css")" />
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/dist/calendar.css")">
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/dist/book_index.css")" />
+
+<script src="@Url.Content("~/Scripts/dist/book_index.js")"></script>
+
+<script src="@Url.Content("~/Scripts/dist/calendar.js")"></script>
+
+ 
+
+<div class="change-type">
+
+    <div class="type-left" class="showType == true ? 'showListType':''">
+
+        <ul>
+
+            <li><a href="@Url.Content("/book/room")">会议室管理</a><span></span></li>
+
+            <li><a href="@Url.Content("/book/index")">预定</a><span></span></li>
+
+            <li><a href="@Url.Content("/book/show")">展示</a><span></span></li>
+
+        </ul>
+
+    </div>
+
+    <div class="type-right">
+
+        <p>
+
+            <i class="el-icon-menu"></i>
+
+            菜单
+
+        </p>
+
+    </div>
+
+</div>
+
+ 
+
+<div class="box">
+
+    <!-- /.box-header -->
+
+    <div class="box-body">
+
+        <div style="width:100%;height:30px;">
+
+            <div class="box-header with-border" style="float:left;display:inline;">
+
+                @*<div style="float:left;padding:7px 10px;margin-right:20px;border:1px solid #72afd2;">
+
+                        <a href="@Url.Content("/book/room")">会议室管理</a>
+
+                    </div>*@
+
+                <div style="float:left;margin-right:30px;border:1px solid red;"></div>
+
+                <div style="padding:7px 20px;float:left;" class="is-booked-0">内部使用</div>
+
+                <div style="padding:7px 20px;float:left;" class="is-booked-1">客户使用</div>
+
+                <div style="padding:7px 20px;float:left;" class="is-booked-2">研发使用</div>
+
+            </div>
+
+            <span style="font-size:20px;margin-left:23%;line-height:60px; font-weight:bold;">会议室预定系统</span>
+
+            <div class="box-header with-border" style="float:right;display:inline;">
+
+                <div id="t_calendar" style="float:left;width:150px;">
+
+                    日期：
+
+                    <input id="user_date" style="width:100px;padding:7px 10px;border:1px solid #ccc;" readonly />
+
+                </div>
+
+                <div style="float:left;margin-left:20px;">
+
+                    <button type="button" class="btn btn-block btn-primary" style="width:80px;" id="btn_book">预约</button>
+
+                </div>
+
+ 
+
+            </div>
+
+        </div>
+
+ 
+
+        <div id="disappare" style="display:none;">
+
+            <p>预定时间小于当前时间，不可预定~</p>
+
+        </div>
+
+        <table class="table table-bordered table-hover" id="table_1"></table>
+
+    </div>
+
+    <!-- /.box-body -->
+
+</div>
+
+<!-- /.box --><!--初始预定 弹窗开始-->
+
+<div class="tan" id="book_do">
+
+    <div class="box">
+
+        <div class="form">
+
+            <span class="close" id="close_doBook">✖</span>
+
+            <h3>会议室预定</h3>
+
+            <form action="#" method="post" name="form_submit" id="form_submit">
+
+                <table class="tb-111">
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>会议主题： </label>
+
+                                    <input type="text" name="b_topic" id="b_topic" placeholder="请输入会议主题" required />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>使用类别： </label>
+
+                                    <select name="b_sort" id="b_sort" class="form-control" style="width:150px;height:30px;padding:0 10px;margin-bottom:10px;">
+
+                                        <option value="0">内部使用</option>
+
+                                        <option value="1">客户使用</option>
+
+                                        <option value="2">研发使用</option>
+
+                                    </select>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>预订人： </label>
+
+                                    <input type="text" name="b_name" id="b_name" placeholder="请输入部门&姓名" required />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>联系电话： </label>
+
+                                    <input type="text" name="b_phone" id="b_phone" placeholder="请输入电话" required />
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>会议室： </label>
+
+                                    <input type="text" class="form-control" id="show_room_name" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                @*<div class="control-group">
+
+                                        <label>预约日期： </label>
+
+                                        <input type="text" name="b_book_date" id="b_book_date" readonly="readonly" />
+
+                                    </div>*@
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>开始日期： </label>
+
+                                    <input type="text" name="b_book_date_1" id="b_book_date_1" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>结束日期： </label>
+
+                                    <input type="text" name="b_book_date_2" id="b_book_date_2" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>开始时间： </label>
+
+                                    <input type="text" class="form-control" name="b_time_1" id="show_s_time" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>结束时间： </label>
+
+                                    <input type="text" class="form-control" name="b_time_2" id="show_e_time" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <input type="hidden" name="b_room_id" id="b_room_id" value="" />
+
+                <input type="hidden" name="b_time_id" id="b_time_id" value="" />
+
+                @*<input type="text" name="name" id="name" placeholder="请输入邮箱地址" />
+
+                    <input type="password" name="password" id="passw" placeholder="请输入密码" />*@
+
+            </form>
+
+            <div style="float:right;">
+
+                <button type="button" class="btn btn-block btn-primary" style="width:80px;" id="btn_submit">提交</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--初始预定 弹窗结束-->
+
+<!--修改预订 弹窗开始-->
+
+<div class="tan" id="bookInfo_edit">
+
+    <div class="box">
+
+        <div class="form">
+
+            <span class="close" id="close_edit">✖</span>
+
+            <h3>修改预订信息</h3>
+
+            <form action="#" method="post" name="form_edit_submit" id="form_edit_submit">
+
+                <table class="tb-111">
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>会议主题： </label>
+
+                                    <input type="text" name="b_edit_topic" id="b_edit_topic" placeholder="请输入会议主题" required />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>使用类别： </label>
+
+                                    <select name="b_edit_sort" id="b_edit_sort" class="form-control" style="width:150px;height:30px;padding:0 10px;margin-bottom:10px;">
+
+                                        <option value="0">内部使用</option>
+
+                                        <option value="1">客户使用</option>
+
+                                        <option value="2">研发使用</option>
+
+                                    </select>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>预订人： </label>
+
+                                    <input type="text" name="b_edit_name" id="b_edit_name" placeholder="请输入部门&姓名" required />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>联系电话： </label>
+
+                                    <input type="text" name="b_edit_phone" id="b_edit_phone" placeholder="请输入电话" required />
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>会议室： </label>
+
+                                    <input type="text" class="form-control" id="b_edit_room_name" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                @*<div class="control-group">
+
+                                        <label>预约日期： </label>
+
+                                        <input type="text" name="b_edit_book_date" id="b_edit_book_date" readonly="readonly" />
+
+                                    </div>*@
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>开始日期： </label>
+
+                                    <input type="text" class="form-control" name="b_edit_book_date_1" id="b_edit_book_date_1" readonly="readonly" />
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>结束日期： </label>
+
+                                    <input type="text" name="b_edit_book_date_2" id="b_edit_book_date_2" />
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>开始时间： </label>
+
+                                    @*<input type="text" class="form-control" name="b_edit_time_1" id="b_edit_time_1" />*@
+
+                                    <select name="b_edit_time_1" id="b_edit_time_1" class="form-control" style="width:150px;height:30px;padding:0 10px;margin-bottom:10px;">
+
+                                        <option value="08:00">08:00</option>
+
+                                        <option value="08:30">08:30</option>
+
+                                        <option value="09:00">09:00</option>
+
+                                        <option value="09:30">09:30</option>
+
+                                        <option value="10:00">10:00</option>
+
+                                        <option value="10:30">10:30</option>
+
+                                        <option value="11:00">11:00</option>
+
+                                        <option value="11:30">11:30</option>
+
+                                        <option value="12:00">12:00</option>
+
+                                        <option value="12:30">12:30</option>
+
+                                        <option value="13:00">13:00</option>
+
+                                        <option value="13:30">13:30</option>
+
+                                        <option value="14:00">14:00</option>
+
+                                        <option value="14:30">14:30</option>
+
+                                        <option value="15:00">15:00</option>
+
+                                        <option value="15:30">15:30</option>
+
+                                        <option value="16:00">16:00</option>
+
+                                        <option value="16:30">16:30</option>
+
+                                        <option value="17:00">17:00</option>
+
+                                        <option value="17:30">17:30</option>
+
+                                        <option value="18:00">18:00</option>
+
+                                        <option value="18:30">18:30</option>
+
+                                        <option value="19:00">19:00</option>
+
+                                    </select>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <div class="control-group">
+
+                                    <label>结束时间： </label>
+
+                                    @*<input type="text" class="form-control" name="b_edit_time_2" id="b_edit_time_2" />*@
+
+                                    <select name="b_edit_time_2" id="b_edit_time_2" class="form-control" style="width:150px;height:30px;padding:0 10px;margin-bottom:10px;">
+
+                                        <option value="08:00">08:00</option>
+
+                                        <option value="08:30">08:30</option>
+
+                                        <option value="09:00">09:00</option>
+
+                                        <option value="09:30">09:30</option>
+
+                                        <option value="10:00">10:00</option>
+
+                                        <option value="10:30">10:30</option>
+
+                                        <option value="11:00">11:00</option>
+
+                                        <option value="11:30">11:30</option>
+
+                                        <option value="12:00">12:00</option>
+
+                                        <option value="12:30">12:30</option>
+
+                                        <option value="13:00">13:00</option>
+
+                                        <option value="13:30">13:30</option>
+
+                                        <option value="14:00">14:00</option>
+
+                                        <option value="14:30">14:30</option>
+
+                                        <option value="15:00">15:00</option>
+
+                                        <option value="15:30">15:30</option>
+
+                                        <option value="16:00">16:00</option>
+
+                                        <option value="16:30">16:30</option>
+
+                                        <option value="17:00">17:00</option>
+
+                                        <option value="17:30">17:30</option>
+
+                                        <option value="18:00">18:00</option>
+
+                                        <option value="18:30">18:30</option>
+
+                                        <option value="19:00">19:00</option>
+
+                                    </select>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <input type="hidden" name="b_edit_room_id" id="b_edit_room_id" value="" />
+
+                @*<input type="hidden" name="b_edit_time_id" id="b_edit_time_id" value="" />*@
+
+                <input type="hidden" name="b_edit_book_id" id="b_edit_book_id" value="" />
+
+            </form>
+
+            <div style="float:right;">
+
+                <button type="button" class="btn btn-block btn-primary" style="width:80px;" id="btn_edit_submit">确定修改</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--修改预订 弹窗结束-->
+
+<!-- 模态框（Modal） -->
+
+<button class="btn btn-primary btn-lg" id="motaikuang" data-toggle="modal" data-target="#myModal" style="display:none;">模态框</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"
+
+                        aria-hidden="true">
+
+                    ×
+
+                </button>
+
+                <h4 class="modal-title" id="myModalLabel">
+
+                    会议预定详情
+
+                </h4>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">会议室：</span>
+
+                    <span class="modal-my-con-right" id="modal_room"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">预定日期：</span>
+
+                    <span class="modal-my-con-right" id="modal_date"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">起止时间：</span>
+
+                    <span class="modal-my-con-right" id="modal_time"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">会议主题：</span>
+
+                    <span class="modal-my-con-right" id="modal_topic"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">预订人：</span>
+
+                    <span class="modal-my-con-right" id="modal_name"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">联系电话：</span>
+
+                    <span class="modal-my-con-right" id="modal_phone"></span>
+
+                </div>
+
+                <div class="modal-my-con">
+
+                    <span class="modal-my-con-left">预约时间：</span>
+
+                    <span class="modal-my-con-right" id="modal_book_time"></span>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer" id="modal_footer" style="display:flex;justify-content:center;">
+
+                <button type="button" id="modal_hide" class="btn btn-primary" data-dismiss="modal" style="display:none;"></button>
+
+                <button type="button" id="modal_edit" modal_book_id="" class="btn btn-primary">
+
+                    修改预订
+
+                </button>
+
+                <button type="button" id="modal_cancel" modal_book_id="" class="btn btn-danger">
+
+                    取消预定
+
+                </button>
+
+            </div>
+
+        </div><!-- /.modal-content -->
+
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal 
