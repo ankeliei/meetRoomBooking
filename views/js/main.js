@@ -169,13 +169,13 @@ layui.use(['form','mobile'], function(){
                 if(roomDateObj[id][i].style == "free"){
                     $('#room_' +id+ ' .layui-btn-group').append(
                         "<button onclick='roomDateOnclick(roomDateObj["+id+"]["+ i +"],"+id+",\""+name+"\")' " +
-                        "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn\">可选</button>"
+                        "style='width:"+ useWidth +"%;padding: 0px' type=\"button\" class=\"layui-btn\">可选</button>"
                     );
                 }
                 if(roomDateObj[id][i].style == "used"){
                     $('#room_' +id+ ' .layui-btn-group').append(
                         "<button onclick='roomDateOnclick(roomDateObj["+id+"]["+ i +"],"+id+",\""+name+"\")' " +
-                        "style='width:"+ useWidth +"%' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
+                        "style='width:"+ useWidth +"%;padding: 0px' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
                     );
                 }
                 //TODO: 在这里绘制后台返回的某会议室的日程安排

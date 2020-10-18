@@ -24,23 +24,30 @@
                 </div>
             </form>
             <div id="mainTable">
-                这里是会议室预约详情大表位置
+                <!--                    会议室详情展示-->
+                <div id="info">
+                    <fieldset class="layui-elem-field layui-field-title"><legend id="roomName">请选择一个会议室</legend></fieldset>
+                    <div id="info-in">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="layui-col-sm12 layui-col-md6">
             <div class="something">
-                <!--                    会议室详情展示-->
-                <div id="info">
-                    <fieldset class="layui-elem-field layui-field-title"><legend id="roomName">请选择一个订单</legend></fieldset>
-                    <div id="info-in" class="bornDisplayNone">
-                        <div id="infoOptions">infoOptions</div>
-                        <div id="infoText">infoText</div>
-                    </div>
-                </div>
                 <!--                    竞争者展示-->
-                <div id="whoRe" class="bornDisplayNone">
-                    <fieldset class="layui-elem-field layui-field-title"><legend>同时段的其他预约：</legend></fieldset>
-                    <ul id="whoReIn"></ul>
+                <div id="makeSure" class="bornDisplayNone" style="text-align: center">
+                    <fieldset class="layui-elem-field layui-field-title"><legend>确认通过此预约吗？</legend></fieldset>
+                    <div id="areYouSure">
+                        <div class="layui-card">
+                            <div class="layui-card-header">请注意</div>
+                            <div class="layui-card-body">
+                                因多个预约所申请的时间冲突<br>
+                                若同意您选中的预约单（黄色）则将自动拒绝与其冲突的其他预约（红色）
+                            </div>
+                        </div>
+                    </div>
+                    <button class="layui-btn" onclick="agree()">同意此预约</button>
+                    <button class="layui-btn" onclick="disagree()">拒绝此预约</button>
                 </div>
             </div>
         </div>

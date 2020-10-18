@@ -20,5 +20,9 @@ else{
     $_SESSION['id'] = $account;
     $_SESSION['name'] = $row['name'];
     $_SESSION['isAdmin'] = $row['isAdmin'];
+    $_SESSION['passwd'] = $row['passwd'];
+    $_SESSION['phone'] = $row['phone'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['position'] = $row['position'];
     echo 1;
 }

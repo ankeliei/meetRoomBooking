@@ -10,9 +10,8 @@
     include("headBar.php")
     ?>
     <div class="layui-fluid">
-        <div class="layui-row">
+        <div class="layui-row"><br>
             <div class="layui-col-sm12 layui-col-md8">
-                这里是左侧表格页面
                 <form class="layui-form" lay-filter="chooseRoom">
                     <div class="layui-inline" style="width: 23%">
                         <select id="roomType" name="roomType" lay-filter="roomType">
