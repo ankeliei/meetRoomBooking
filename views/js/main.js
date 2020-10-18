@@ -277,17 +277,17 @@ function roomDateOnclick(obj,id,name){
                 dataType:'text',
                 type:'post',
                 success:function (data){
-
                     resObj = JSON.parse(data);
                     if(resObj['status'] == 1){
                         window.location.replace("login.html");
                     }
                     if(resObj['status'] == 0){
-                        layer.open({
-                            type: 1,
-                            content: "预约提交成功！等待管理员审核!"
-                        })
+                        layer.msg("预约提交成功！等待管理员审核!");
                         roomDateOnclick(obj,id,name);   //重新刷新右侧选择区
+                    }
+                    if(resObj['status'] == 3){
+                        layer.msg("错误：请检查预约的起止时间!");
+                        // roomDateOnclick(obj,id,name);   //重新刷新右侧选择区
                     }
                 }
             })

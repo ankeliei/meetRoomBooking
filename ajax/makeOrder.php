@@ -15,6 +15,12 @@
         $orderTxt = $_POST['orderTxt'];
         $roomid = $_POST['room'];
 
+        if($startTime>=$endTime||$startTime==null||$endTime==null){
+            $arr['status'] = 3;        //状态码3表示预约时间有问题!
+            echo json_encode($arr);
+            exit();
+        }
+
         $sql = " INSERT INTO newOrders (id, user, room, createTime, startTime, endTime, txt, status, revokeTime) ".
             " VALUES (NULL, '" .$userid. "', '" .$roomid."', '', '" .$startTime. "', '" .$endTime. "', '" .$orderTxt. "', '', '')";
 
