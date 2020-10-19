@@ -1,0 +1,40 @@
+<% @  Page language=“vb debug=”ture” %>
+　　<% @  Import Namespace=“System.Web.Mail” %>
+　　<Html>
+　　<Body>
+　　<H2>欢迎使用asp.net发送电子邮件<Hr></H2>
+　　<form runat=“server”>
+　　<Table border=1>
+　　<Tr><Td>收信人</Td>
+　　<Td><input Type=“text”  id=“mailto”  size=30 runat=“server”/></Td></Tr>　
+　　<Tr><Td>寄信人</Td>
+　　<Td><input Type=“text”  id=“mailfrom”  size=30 runat=“server”/></Td></Tr>　
+　　<Tr><Td>主题</Td>
+　　<Td><input Type=“text”  id=“mailsubject”  size=30 runat=“server”/></Td></Tr>　
+　　<Tr><Td>内容</Td>
+　　<Td><textarea id=“mailBody”  rows=10  cols=40 runat=“server”/></textarea><br>
+　　添加附件：<input Type =”file” id=”Attach” runat=”server”>
+　　</Td></Tr>　
+　　</Table>
+　　<Input Type=“button” Value=“发送” id=“Sendbutton” onserverclick=“Sendbutton_click runat=“server”/>
+　　</form>
+　　<hr>
+　　<asp:label id=“label1” runat=“server”/>
+　　</Body>
+　　</Html>
+　　<Script Language=“vb”  runat=“server”>.
+　　Sub Sendbutton_click(Sender as object , e as eventargs)
+　　Dim mail as MailMessage=new MailMessage()
+　　‘以下是设定MailMessage对象的属性
+　　Mail.to = mailto.Value
+　　Mail.from = mailfrom.Value
+　　Mail.subject = mailsubject.Value
+　　Mail.Attachments.Add(new mailAttachment(Attach.postedfile.filename))
+　　Mail.Body=MailBody.Value
+　　‘指定使用缺省的SMTP服务器
+　　SmtpMail.Smtpserver=””
+　　‘开始发送邮件
+　　SmtpMail.Send(mail)
+　　Label1.text=“信件发送成功！”
+　　End sub
+　　</script>
