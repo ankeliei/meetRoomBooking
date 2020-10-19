@@ -9,9 +9,16 @@
 <?php include("headBar.php"); ?>
 <?php session_start();if($_SESSION['isAdmin']!=1){echo "<h1>您权限不足或未登录！</h1>";exit();} ?>
 <div class="layui-fluid">
+    <div class="layui-row" id="allInOne">
+        <table id="roomDateTable" class="layui-table" lay-filter="roomDateTable">
+            <thead>
+            <tr id="tableHead">
+            </tr>
+            </thead>
+        </table>
+    </div>
     <div class="layui-row">
-        <div class="layui-col-sm12 layui-col-md6">
-            这里是左侧表格页面
+        <div class="layui-col-sm12 layui-col-md6"><br>
             <form class="layui-form" lay-filter="chooseRoom">
                 <div class="layui-inline" style="width: 45%">
                     <select id="roomid" name="roomid" lay-filter="roomid">

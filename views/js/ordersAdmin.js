@@ -7,6 +7,28 @@ var otherOrders = new Array();  //与选中的订单相冲突的订单
 var roomList = {};              //会议室列表
 var userList = {};              //用户列表
 
+//表头渲染
+function tableHead(){
+    var $ = layui.$;
+    $('#tableHead').empty();
+    $('#tableHead').append("<th lay-data=\"{field:'room'}\">会议室</th>");
+    for(var i = 0; i < 14; i++){
+        var viewDay = new Date();
+        viewDay.setTime(viewDay.valueOf()+86400000*i);
+        var dateStr=viewDay.toLocaleDateString().slice(5,10)+"<br>"+viewDay.toDateString().slice(0,3);
+        $('#tableHead').append("<th lay-data=\"{field:'"+ i +"', event:'"+ i +"'}\">"+dateStr+"</th>")
+    }
+}
+//表体数据渲染
+function tableData(){
+    var table = layui.table;
+
+    table.render({
+        elem: '#roomDateTable' //指定原始表格元素选择器（推荐id选择器）
+        ,height: 315 //容器高度
+        ,url:'/ajax/tableData.php'
+    });
+}
 //加载此会议室的某日待处理的预约单
 function ajaxRoomOrders(){
     layui.$.post("/ajax/roomDateOrders.php",
@@ -50,6 +72,7 @@ layui.use(['form'],function(){
     var $ = layui.$;
 
     $('#admin').addClass('layui-this');
+    tableHead();
     dateItem();
     ajaxRoomList();
     ajaxUserList();
@@ -80,7 +103,7 @@ layui.use(['form'],function(){
         for(i=0; i<14; i++){
             var viewDay = new Date();
             viewDay.setTime(viewDay.valueOf()+86400000*i);
-            $('#date').append("<option value='"+i+"'>"+viewDay.toLocaleDateString()+"</option>")
+            $('#date').append("<option value='"+i+"'>"+viewDay.toLocaleDateString()+" "+viewDay.toDateString().slice(0,3)+"</option>")
         }
     }
     //加载用户列表
