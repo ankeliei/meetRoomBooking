@@ -8,10 +8,14 @@
         {
             $servername = "localhost";
             $password = "2533";
-//            $username = "reserveSystem";
-//            $dbname = "reserveSystem";
-            $dbname = "running";
-            $username = "running";
+
+//            用于生产环境
+            $username = "reserveSystem";
+            $dbname = "reserveSystem";
+
+//              用于生产环境
+//            $dbname = "running";
+//            $username = "running";
 
             $this->con = new mysqli($servername, $username, $password, $dbname);
             if ($this->con->connect_error){
