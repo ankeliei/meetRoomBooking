@@ -2,7 +2,7 @@
     require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
     $id = (int)$_POST["id"];
-    $sql = "select * from usableRooms where id = " . $id;
+    $sql = "select * from rooms where id = " . $id . " and wasdeleted = 0 and usable = 1";
     $con->setSql($sql);
     $res = $con->getRes();
 

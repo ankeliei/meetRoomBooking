@@ -7,9 +7,11 @@
         public function __construct()
         {
             $servername = "localhost";
-            $username = "reserveSystem";
             $password = "2533";
-            $dbname = "reserveSystem";
+//            $username = "reserveSystem";
+//            $dbname = "reserveSystem";
+            $dbname = "running";
+            $username = "running";
 
             $this->con = new mysqli($servername, $username, $password, $dbname);
             if ($this->con->connect_error){

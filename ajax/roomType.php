@@ -6,10 +6,10 @@
     $mediaType = $_POST["mediaType"];
     if($mediaType==""){$mediaType="%";}
 
-    $sql = "select distinct roomType from usableRooms where mediaType like \""
+    $sql = "select distinct roomType from rooms where mediaType like \""
         .$mediaType
         ."\" and roomSize like \""
-        .$roomSize."\"";
+        .$roomSize."\" and wasdeleted = 0 and usable = 1";
 
     $con->setSql($sql);
     $res = $con->getRes();

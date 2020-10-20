@@ -5,10 +5,10 @@ $roomSize = $_POST["roomSize"];
 if($roomSize==""){$roomSize="%";}
 $roomType = $_POST["roomType"];
 if($roomType==""){$roomType="%";}
-$sql = "select distinct mediaType from usableRooms where roomType like \""
+$sql = "select distinct mediaType from rooms where roomType like \""
         .$roomType
         ."\" and roomSize like \""
-        .$roomSize."\"";
+        .$roomSize."\" and wasdeleted = 0 and usable = 1";
 
 
 $con->setSql($sql);
