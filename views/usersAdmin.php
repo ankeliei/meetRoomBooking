@@ -13,6 +13,6 @@
 <body>
 <?php include("headBar.php"); ?>
 <?php session_start();if($_SESSION['isAdmin']!=1){echo "<h1>您权限不足或未登录！</h1>";exit();} ?>
-用户管理
+用户管理(建设中)
 </body>
 </html>

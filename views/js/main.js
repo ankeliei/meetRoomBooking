@@ -44,7 +44,8 @@ layui.use(['form','mobile'], function(){
         for(i=0; i<14; i++){
             var viewDay = new Date();
             viewDay.setTime(viewDay.valueOf()+86400000*i);
-            $('#date').append("<option value='"+i+"'>"+viewDay.toLocaleDateString()+"</option>")
+            var dateStr=viewDay.toLocaleDateString().slice(5,10)+" "+viewDay.toDateString().slice(0,3);
+            $('#date').append("<option value='"+i+"'>"+dateStr+"</option>");
         }
     }
     //处理筛选下拉框的变动
@@ -270,6 +271,7 @@ function roomDateOnclick(obj,id,name){
         form.on('submit(orderTime)',function (data){
             console.log("点击了提交按钮");
             data['field']['room'] = id;
+            data['field']['creatTime'] = new Date().valueOf();
             console.log(data);
             $.ajax({
                 url:'/ajax/makeOrder.php',

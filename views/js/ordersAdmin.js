@@ -52,12 +52,22 @@ function ajaxRoomOrders(){
                     var roomOrdertxt = roomDateOrdersObj['data'][Number(i)]['txt'];
                     roomOrderStartTime =new Date(Number(roomDateOrdersObj['data'][Number(i)]['startTime'])).toTimeString().slice(0,5);
                     roomOrderEndTime =new Date(Number(roomDateOrdersObj['data'][Number(i)]['endTime'])).toTimeString().slice(0,5);
+                    var roomOrderuserStr = roomOrderuser+"";
+
+
+                    for(j in userList['data']){
+                        if(userList['data'][j]['id']==roomOrderuser){
+                            roomOrderuserStr = userList['data'][j]['name'];
+                            break;
+                        }
+                    }
+
                     layui.$('#info-in').append('<button class="layui-btn layui-btn-fluid"' +
                         'onclick="orderOnclock('+ roomOrderId +')"' +
                         'id="order_'+ roomOrderId +'">' +
                         '<p style="text-align: left">' +
                         roomOrderStartTime+'-'+roomOrderEndTime+
-                        ' 用户：'+roomOrderuser+
+                        ' 用户：'+roomOrderuserStr+
                         ' 备注：'+roomOrdertxt+
                         '</p>'+
                         '</button>'+'<hr>')

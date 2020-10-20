@@ -10,19 +10,20 @@
         require_once "phpClass/Dbcon.php";
         $con = new Dbcon();
         $userid = $_SESSION['id'];
+        $creatTime = $_POST['creatTime'];
         $startTime = $_POST['startTimeSelect'];
         $endTime = $_POST['endTimeSelect'];
         $orderTxt = $_POST['orderTxt'];
         $roomid = $_POST['room'];
 
-        if($startTime>=$endTime||$startTime==null||$endTime==null){
+        if($startTime>=$endTime||$startTime==null||$endTime==null||$creatTime>$startTime){
             $arr['status'] = 3;        //状态码3表示预约时间有问题!
             echo json_encode($arr);
             exit();
         }
 
         $sql = " INSERT INTO newOrders (id, user, room, createTime, startTime, endTime, txt, status, revokeTime) ".
-            " VALUES (NULL, '" .$userid. "', '" .$roomid."', '', '" .$startTime. "', '" .$endTime. "', '" .$orderTxt. "', '', '')";
+            " VALUES (NULL, '" .$userid. "', '" .$roomid."', '".$creatTime."', '" .$startTime. "', '" .$endTime. "', '" .$orderTxt. "', '', '')";
 
         $con->setSql($sql);
         $res = $con->getRes();
