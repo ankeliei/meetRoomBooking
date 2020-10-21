@@ -45,9 +45,7 @@ layui.use(['form','mobile'], function(){
         for(i=0; i<14; i++){
             var viewDay = new Date();
             viewDay.setTime(viewDay.valueOf()+86400000*i);
-            var dateStr=viewDay.toLocaleDateString().slice(5,10)+" "+viewDay.toDateString().slice(0,3);
-
-
+            var dateStr=viewDay.toLocaleDateString().slice(0,10)+"--"+viewDay.toDateString().slice(0,3);
 
             $('#date').append("<option value='"+i+"'>"+dateStr+"</option>");
         }
