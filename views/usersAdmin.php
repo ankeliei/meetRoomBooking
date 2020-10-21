@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理</title>
+    <meta name="renderer" content="webkit">
     <script src="/layui/layui.js"></script>
     <script>
         window.onload=function(){

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>预约主界面</title>
+    <meta name="renderer" content="webkit">
     <script src="/layui/layui.js"></script>
 </head>
 <body>
@@ -86,9 +87,9 @@
                                 </div><br>
 
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">备注信息</label>
+                                    <label class="layui-form-label">会议名称</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="orderTxt" required lay-verify="required" placeholder="请输入备注信息" autocomplete="off" class="layui-input">
+                                        <input type="text" name="orderTxt" required lay-verify="required" placeholder="请输入会议名称" autocomplete="off" class="layui-input">
                                     </div>
                                 </div>
 

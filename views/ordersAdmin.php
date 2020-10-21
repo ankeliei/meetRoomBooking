@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>预约管理</title>
+    <meta name="renderer" content="webkit">
     <script src="/layui/layui.js"></script>
 </head>
 <body>
