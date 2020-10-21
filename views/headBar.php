@@ -51,7 +51,7 @@
 <!--                <img style="height: 60px" src="images/HSlogo.png">-->
 <!--            </li>-->
 
-<!--            <li id="about" class="layui-nav-item"><a href="/views/about.php">关于</a></li>-->
+            <li id="about" class="layui-nav-item"><a href="/views/about.php">关于</a></li>
         </ul>
 <script>
     layui.use('element',function(){
