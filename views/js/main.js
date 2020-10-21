@@ -37,6 +37,7 @@ layui.use(['form','mobile'], function(){
         console.log(data.value);
         date = data.value;
         ajaxMainTable();
+        dateSelecterChange();
     })
 
     //初始化时间下拉选择框
@@ -115,7 +116,6 @@ layui.use(['form','mobile'], function(){
             function (data, status) {
                 $("#roomType").html(data);
                 form.render("select","chooseRoom");
-                // form.render();
             })
     }
     function ajaxRoomSize(){
@@ -182,12 +182,21 @@ layui.use(['form','mobile'], function(){
                         "style='width:"+ useWidth +"%;padding: 0px' type=\"button\" class=\"layui-btn layui-btn-primary\">已占</button>"
                     );
                 }
-                //TODO: 在这里绘制后台返回的某会议室的日程安排
             }
         })
         console.log(""+id+": "+name);
     }
 });
+
+//日期选择框变动时功能区的初始化
+function dateSelecterChange(){
+    var $ = layui.$;
+    $('#roomName').text("请选择一个会议室");
+    $('#info-in').hide();
+    $('#whoUse').hide();
+    $('#makeOrder').hide();
+    $('#whoRe').hide();
+}
 
 function roomDateOnclick(obj,id,name){
     layui.use('form',function () {
@@ -196,10 +205,10 @@ function roomDateOnclick(obj,id,name){
         console.log(obj);
 
         
-        $('#info-in').css('display','none');
-        $('#whoUse').css('display','none');
-        $('#makeOrder').css('display','none');
-        $('#whoRe').css('display','none');
+        $('#info-in').hide();
+        $('#whoUse').hide();
+        $('#makeOrder').hide();
+        $('#whoRe').hide();
 
         var roomInfo = {};
         $.post("/ajax/roomInfo.php",
@@ -214,7 +223,7 @@ function roomDateOnclick(obj,id,name){
                 $('#infoText').html("用途说明："+roomInfo['stat']);
             })
 
-        $('#info-in').css('display','block');           //设置会议室信息div显示
+        $('#info-in').show();           //设置会议室信息div显示
         var timeStringTitle = " | "+
             new Date(Number(obj['startTime'])).toTimeString().slice(0,5)+"-"+
             new Date(Number(obj['endTime'])).toTimeString().slice(0,5);
@@ -223,7 +232,7 @@ function roomDateOnclick(obj,id,name){
         //空闲区的点击事件处理
         if(obj['style']=="free"){
             //对下单表单显示
-            $('#makeOrder').css('display','block');
+            $('#makeOrder').show();
             //TODO：填充开始时间
             setStartTimeOptions(obj['startTime'],obj['endTime']);
             setEndTimeOptions(obj['startTime'],obj['endTime']);
@@ -232,7 +241,7 @@ function roomDateOnclick(obj,id,name){
 
             //竞争者区块的展示
             $('#whoReIn').empty();
-            $('#whoRe').css('display','block');
+            $('#whoRe').show();
 
             if(obj['orders'].length==0){
                 $('#whoReIn').append("此时间段内还没有其他预约...");
@@ -259,7 +268,7 @@ function roomDateOnclick(obj,id,name){
         //占用区的点击事件处理
         if(obj['style']=="used"){
             //对预约详情部分显示
-            $('#whoUse').css('display','block');
+            $('#whoUse').show();
             $.post("/ajax/userInfo.php",
                 {
                     id : obj['orders']['user'],
