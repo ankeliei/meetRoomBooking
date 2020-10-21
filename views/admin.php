@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>管理员界面</title>
+    <meta name="renderer" content="webkit">
     <script>
         window.onload=function(){
             document.getElementById("admin").className += " layui-this";

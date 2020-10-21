@@ -8,8 +8,12 @@
         {
             $servername = "localhost";
             $password = "2533";
+
+//            用于生产环境
 //            $username = "reserveSystem";
 //            $dbname = "reserveSystem";
+
+//              用于生产环境
             $dbname = "running";
             $username = "running";
 

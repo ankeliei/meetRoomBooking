@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>会议室管理</title>
+    <meta name="renderer" content="webkit">
+    <meta name="renderer" content="webkit">
     <script src="/layui/layui.js"></script>
     <script>
         window.onload=function(){
