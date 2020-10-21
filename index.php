@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>人文学院会议室预约管理系统</title>
     <meta name="renderer" content="webkit">
     <script src="/layui/layui.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
