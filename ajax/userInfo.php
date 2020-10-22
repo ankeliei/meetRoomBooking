@@ -20,3 +20,4 @@
         $arr['sql'] = $sql;
     }
     echo json_encode($arr);
+?>
