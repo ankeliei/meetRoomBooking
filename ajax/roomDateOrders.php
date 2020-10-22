@@ -1,4 +1,4 @@
-<?php
+<?php       # 返回某日某会议室的待处理订单
     require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
     $room = $_POST["room"];         //房间号

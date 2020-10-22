@@ -1,4 +1,4 @@
-<?php
+<?php       #构建某日某会议室的可选、已选状态
     require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
     $room = $_POST["room"];         //房间号

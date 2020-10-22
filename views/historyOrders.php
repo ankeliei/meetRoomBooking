@@ -14,6 +14,8 @@
     <?php
     include("headBar.php")
     ?>
-建设中...
+    <div>
+        建设中...
+    </div>
 </body>
 </html>
