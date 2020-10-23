@@ -1,5 +1,16 @@
 <?php
-    require_once "phpClass/Dbcon.php";
+    function mydate($timestamp){
+        return date("Y 年 m 月 d 日",$timestamp);
+    }
+    function mydatetime($timestamp){
+        return date("Y 年 m 月 d 日 H 点 i 分",$timestamp);
+    }
+    function mytime($timestamp){
+        return date("H 点 i 分",$timestamp);
+    }
+
+
+require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
     session_start();
     $user = $_SESSION['id'];
@@ -17,9 +28,9 @@
             array_push($arr['data'], array(
                'id'=>$row['id'],
                 'room'=>$row['room'],
-                'createTime'=>$row['createTime'],
-                'startTime'=>$row['startTime'],
-                'endTime'=>$row['endTime'],
+                'createTime'=>mydate(substr($row['createTime'],0,10)),
+                'startTime'=>mydatetime(substr($row['startTime'],0,10)),
+                'endTime'=>mytime(substr($row['endTime'],0,10)),
                 'txt'=>$row['txt'],
                 'status'=>$row['status']
             ));
