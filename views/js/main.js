@@ -197,7 +197,7 @@ layui.use(['form','mobile'], function(){
                 if(roomDateObj[id][i].style == "free"){
                     $('#room_' +id+ ' .layui-btn-group').append(
                         "<button onclick='roomDateOnclick(roomDateObj["+id+"]["+ i +"],"+id+",\""+name+"\")' " +
-                        "style='width:"+ useWidth +"%;padding: 0px' type=\"button\" class=\"layui-btn\">可选</button>"
+                        "style='width:"+ useWidth +"%;padding: 0px' type=\"button\" class=\"layui-btn\">空闲</button>"
                     );
                 }
                 if(roomDateObj[id][i].style == "used"){
