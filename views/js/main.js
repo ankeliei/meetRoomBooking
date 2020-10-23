@@ -297,8 +297,9 @@ function roomDateOnclick(obj,id,name){
                         window.location.replace("login.html");
                     }
                     if(resObj['status'] == 0){
-                        layer.msg("预约提交成功！等待管理员审核!");
-                        roomDateOnclick(obj,id,name);   //重新刷新右侧选择区
+                        layer.msg("预约提交成功！等待管理员审核!",function (){
+                            location.reload();
+                        });
                     }
                     if(resObj['status'] == 3){
                         layer.msg("错误：请检查预约的起止时间!");
