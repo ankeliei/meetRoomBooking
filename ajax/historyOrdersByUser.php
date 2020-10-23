@@ -1,4 +1,18 @@
 <?php
+    $roomList = array();
+    require_once "phpClass/Dbcon.php";
+    $con = new Dbcon();
+
+    $sql = "select id, name from rooms";
+    $con->setSql($sql);
+    $res = $con->getRes();
+    while ($row = $res->fetch_assoc()){
+        array_push($roomList,array(
+            'id' => $row['id'],
+            'name'=> $row['name']
+        ));
+    }
+
     function mydate($timestamp){
         return date("Y 年 m 月 d 日",$timestamp);
     }
@@ -17,12 +31,18 @@
             return "被拒绝";
         }
     }
+    function changeRoom($room){
+        global $roomList;
+        foreach ($roomList as $value){
+            if($value['id']==$room){
+                return $value['name'];
+            }
+        }
+    }
 
-require_once "phpClass/Dbcon.php";
-    $con = new Dbcon();
     session_start();
     $user = $_SESSION['id'];
-    $sql = "select * from newOrders where user = '".$user."'";
+    $sql = "select * from newOrders where user = '".$user."' order by id DESC";
     $con->setSql($sql);
     $res = $con->getRes();
 
@@ -35,7 +55,7 @@ require_once "phpClass/Dbcon.php";
         while ($row = $res->fetch_assoc()){
             array_push($arr['data'], array(
                'id'=>$row['id'],
-                'room'=>$row['room'],
+                'room'=>changeRoom($row['room']),
                 'createTime'=>mydate(substr($row['createTime'],0,10)),
                 'startTime'=>mydatetime(substr($row['startTime'],0,10)),
                 'endTime'=>mytime(substr($row['endTime'],0,10)),
