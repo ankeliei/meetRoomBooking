@@ -1,4 +1,4 @@
-<?php
+<?php       #构建某日某会议室的可选、已选状态
     require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
     $room = $_POST["room"];         //房间号
@@ -8,7 +8,7 @@
         $time . " <= startTime and " .
         $timeEnd . " >= startTime ) or ( " .
         $time . " <= endTime and " .
-        $timeEnd . " >= endTime )) and room = " . $room;
+        $timeEnd . " >= endTime )) and room = " . $room. " order by startTime";
     //TODO:SQL语句可以优化
     $con->setSql($sql);
     $res = $con->getRes();

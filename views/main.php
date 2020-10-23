@@ -10,6 +10,15 @@
     <?php
     include("headBar.php")
     ?>
+    <?php
+        $flag=$_SERVER['HTTP_USER_AGENT'];
+        if(preg_match('/Trident/',$flag)){
+            echo "错误!<br>请使用 谷歌浏览器 或 360浏览器等 已经适配的浏览器访问!";
+            echo $flag;
+            exit();
+        }
+
+    ?>
     <div class="layui-fluid">
         <div class="layui-row"><br>
             <div class="layui-col-sm12 layui-col-md8">

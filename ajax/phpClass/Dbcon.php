@@ -9,7 +9,7 @@
             $servername = "localhost";
             $password = "2533";
 
-//            用于生产环境
+//            用于开发环境
 //            $username = "reserveSystem";
 //            $dbname = "reserveSystem";
 

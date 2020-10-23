@@ -34,7 +34,8 @@
                     }
                     else echo '<dd><a href="/views/historyOrders.php">历史预约记录</a></dd>'.
 //                        '<dd><a href="/views/runningOrders.php">进行中的预约</a></dd>'.
-                        '<dd><a href="/views/me.php">我的信息</a></dd>';
+                        '<dd><a href="/views/me.php">我的信息</a></dd>'.
+                        '<dd><a href="/views/changePassword.php">修改密码</a></dd>';
                     ?>
                 </dl>
             </li>

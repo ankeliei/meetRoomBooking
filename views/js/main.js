@@ -20,18 +20,21 @@ layui.use(['form','mobile'], function(){
         roomType = data.value;
         ajaxMainTable();
         chooseChange("roomType");
+        dateSelecterChange();
     })
     form.on('select(roomSize)',function (data){
         console.log(data.value);
         roomSize = data.value;
         ajaxMainTable();
         chooseChange("roomSize");
+        dateSelecterChange();
     })
     form.on('select(mediaType)',function (data){
         console.log(data.value);
         mediaType = data.value;
         ajaxMainTable();
         chooseChange("mediaType");
+        dateSelecterChange();
     })
     form.on('select(date)',function (data){
         console.log(data.value);
