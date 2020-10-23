@@ -43,12 +43,35 @@ layui.use(['form','mobile'], function(){
         dateSelecterChange();
     })
 
+    //辅助函数,日期字符串的本地化
+    function myDateStr(viewDay){
+        y = viewDay.getFullYear();
+        m = viewDay.getMonth()+1;
+        d = viewDay.getDate();
+        dd = viewDay.getDay();
+        if(dd == 0){
+            dd = "周日";
+        }else if(dd == 1){
+            dd = "周一";
+        }else if(dd == 2){
+            dd = "周二";
+        }else if(dd == 3){
+            dd = "周三";
+        }else if(dd == 4){
+            dd = "周四";
+        }else if(dd == 5){
+            dd = "周五";
+        }else if(dd == 6){
+            dd = "周六";
+        }
+        return y+"年"+m+"月"+d+"日 "+dd;
+    }
     //初始化时间下拉选择框
     function dateItem(){
         for(i=0; i<14; i++){
             var viewDay = new Date();
             viewDay.setTime(viewDay.valueOf()+86400000*i);
-            var dateStr=viewDay.toLocaleDateString().slice(0,10)+"--"+viewDay.toDateString().slice(0,3);
+            var dateStr=myDateStr(viewDay);
 
             $('#date').append("<option value='"+i+"'>"+dateStr+"</option>");
         }
@@ -297,8 +320,9 @@ function roomDateOnclick(obj,id,name){
                         window.location.replace("login.html");
                     }
                     if(resObj['status'] == 0){
-                        layer.msg("预约提交成功！等待管理员审核!");
-                        roomDateOnclick(obj,id,name);   //重新刷新右侧选择区
+                        layer.msg("预约提交成功！等待管理员审核!",function (){
+                            location.reload();
+                        });
                     }
                     if(resObj['status'] == 3){
                         layer.msg("错误：请检查预约的起止时间!");
