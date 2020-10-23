@@ -8,7 +8,15 @@
     function mytime($timestamp){
         return date("H 点 i 分",$timestamp);
     }
-
+    function changeStatus($status){
+        if($status == 0){
+            return "待审核";
+        }else if($status == 1){
+            return "已通过";
+        }else if($status == 2){
+            return "被拒绝";
+        }
+    }
 
 require_once "phpClass/Dbcon.php";
     $con = new Dbcon();
@@ -32,7 +40,7 @@ require_once "phpClass/Dbcon.php";
                 'startTime'=>mydatetime(substr($row['startTime'],0,10)),
                 'endTime'=>mytime(substr($row['endTime'],0,10)),
                 'txt'=>$row['txt'],
-                'status'=>$row['status']
+                'status'=>changeStatus($row['status'])
             ));
         }
     }

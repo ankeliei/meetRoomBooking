@@ -8,7 +8,7 @@
         $time . " <= startTime and " .
         $timeEnd . " >= startTime ) or ( " .
         $time . " <= endTime and " .
-        $timeEnd . " >= endTime )) and room = " . $room;
+        $timeEnd . " >= endTime )) and room = " . $room. " order by startTime";
     //TODO:SQL语句可以优化
     $con->setSql($sql);
     $res = $con->getRes();
