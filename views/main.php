@@ -44,7 +44,7 @@
                     </div>
                 </form>
                 <div id="mainTable">
-                    这里是会议室预约详情大表位置
+                    加载中,若长时间未响应,请刷新重试
                 </div>
             </div>
             <div class="layui-col-sm12 layui-col-md4">
@@ -56,8 +56,8 @@
                         </fieldset>
                         <div id="info-in" class="bornDisplayNone">
 <!--                            <div id="startAndEnd">startAndEnd</div>-->
-                            <div id="infoOptions">infoOptions</div>
-                            <div id="infoText">infoText</div>
+                            <div id="infoOptions">信息加载中</div>
+                            <div id="infoText">信息加载中</div>
 
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <legend>占用详情：</legend>
                         </fieldset>
                         <div id="orderUser"></div>
-                        <div id="orderTxt">orderInfo</div>
+                        <div id="orderTxt">信息加载中</div>
                     </div>
 <!--                    下单表单-->
                     <div id="makeOrder" class="bornDisplayNone">
