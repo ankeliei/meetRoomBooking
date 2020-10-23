@@ -18,7 +18,7 @@
     <table id="main" lay-filter="mainTable" class="layui-table" lay-data="{url:'/ajax/historyOrdersByUser.php/'}">
         <thead>
             <tr>
-                <th lay-data="{field:'id', width:80, sort: true, fixed: true}">编号</th>
+                <th lay-data="{field:'id', width:80, sort: true,     fixed: true}">编号</th>
                 <th lay-data="{field:'room', width:120}">会议室</th>
                 <th lay-data="{field:'createTime', width:160, sort: true}">创建时间</th>
                 <th lay-data="{field:'startTime', width:160, sort: true}">开始时间</th>
