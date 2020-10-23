@@ -31,7 +31,7 @@
     </table>
 
     <script type="text/html" id="delbut">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">撤销</a>
     </script>
 
     <script src="js/userHistory.js"></script>

@@ -49,19 +49,19 @@ layui.use(['form','mobile'], function(){
         m = viewDay.getMonth()+1;
         d = viewDay.getDate();
         dd = viewDay.getDay();
-        if(dd = 0){
+        if(dd == 0){
             dd = "周日";
-        }else if(dd = 1){
+        }else if(dd == 1){
             dd = "周一";
-        }else if(dd = 2){
+        }else if(dd == 2){
             dd = "周二";
-        }else if(dd = 3){
+        }else if(dd == 3){
             dd = "周三";
-        }else if(dd = 4){
+        }else if(dd == 4){
             dd = "周四";
-        }else if(dd = 5){
+        }else if(dd == 5){
             dd = "周五";
-        }else if(dd = 6){
+        }else if(dd == 6){
             dd = "周六";
         }
         return y+"年"+m+"月"+d+"日 "+dd;
