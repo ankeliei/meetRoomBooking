@@ -19,6 +19,21 @@
 <!--            左侧说明页 9/12-->
             <div class="layui-collapse">
                 <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">为什么总是提示我检查预约时间</h2>
+                    <div class="layui-colla-content">
+                        1. 不可以预约“现在”之前的时间<br>
+                        2. 开始时间 必须要比 结束时间 要早<br>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title">我可以预约哪些时间呢</h2>
+                    <div class="layui-colla-content">
+                        1. 系统支持14天以内的预约<br>
+                        2. 可以预约每天的早上 8：00 到晚上 22：00 之间的时间段<br>
+                        3. 选择不同的日期，页面上展示的“空闲区”可以预约<br>
+                    </div>
+                </div>
+                <div class="layui-colla-item">
                     <h2 class="layui-colla-title">每次都要登录好麻烦</h2>
                     <div class="layui-colla-content">
                         1. 只有 提交预约 查看个人预约历史 查看个人信息 删除预约 等功能要求您必须登录<br>
@@ -87,6 +102,17 @@
                 <li class="layui-timeline-item">
                     <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                     <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">2020年10月26日更新</h3>
+                        <p>第五次更新</p>
+                        <ul>
+                            <li>优化: 管理员预约管理界面体验优化</li>
+                            <li>修复: 某些极端情况下的预约审批与申请之间的冲突</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                    <div class="layui-timeline-content layui-text">
                         <h3 class="layui-timeline-title">2020年10月23日更新</h3>
                         <p>第四次更新</p>
                         <ul>
@@ -123,8 +149,6 @@
         //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
         layui.use('element', function(){
             var element = layui.element;
-
-            //…
         });
     </script>
 </body>

@@ -7,7 +7,7 @@ layui.use(['jquery', 'table', 'layer'],function (){
         var data = obj.data;
         console.log(obj);
         if(obj.event === 'del'){
-            layer.confirm('<div style="text-align: center">真的撤销预约么?<br>撤销后不可恢复<br>此订单将不再会被管理员审批或被分配有会议室使用时间</div>', function(index){
+            layer.confirm('<div style="text-align: center">真的删除预约么?<br>删除后不可恢复<br>此订单将不再会被管理员审批或被分配有会议室使用时间</div>', function(index){
                 obj.del();
                 console.log(obj);
                 $.post('/ajax/delOrder.php',{

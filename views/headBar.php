@@ -43,7 +43,8 @@
             <li id="admin" class="layui-nav-item<?php if($_SESSION['isAdmin']!=1){echo ", bornDisplayNone";}?>">
                 <a href="javascript:;">系统管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="ordersAdmin.php">预约管理</a></dd>
+                    <dd><a href="newOrdersAdmin.php">预约管理</a></dd>
+<!--                    <dd><a href="ordersAdmin.php">预约管理</a></dd>-->
                     <dd><a href="usersAdmin.php">用户管理</a></dd>
                     <dd><a href="roomsAdmin.php">会议室管理</a></dd>
                 </dl>
